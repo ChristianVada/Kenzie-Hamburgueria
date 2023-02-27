@@ -6,7 +6,7 @@ import LogoKenzieBurguer from '../../assets/LogoKenzieBurguer.svg';
 
 import { StyledContainer } from '../../styles/grid';
 
-const Header = () => (
+const Header = ({ handleShowModal }) => (
   <StyledHeader>
     <StyledContainer containerWidth={1300}>
       <div className='flexGrid'>
@@ -18,12 +18,7 @@ const Header = () => (
         <nav className='nav' role='navigation'>
           <SearchForm />
           <div className='buttons'>
-            <button
-              type='button'
-              onClick={() => {
-                console.log('Criar lógica');
-              }}
-            >
+            <button type='button' onClick={handleShowModal}>
               <MdShoppingCart size={28} />
             </button>
             <button type='button'>

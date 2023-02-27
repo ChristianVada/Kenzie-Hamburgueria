@@ -4,20 +4,14 @@ import CartProductList from './CartProductList';
 import { StyledCartModalBox } from './style';
 import { StyledParagraph, StyledTitle } from '../../styles/typography';
 
-const CartModal = () => (
+const CartModal = ({ handleCloseModal }) => (
   <StyledCartModalBox>
     <dialog>
       <header>
         <StyledTitle tag='h2' $fontSize='three'>
           Carrinho de compras
         </StyledTitle>
-        <button
-          type='button'
-          aria-label='Fechar'
-          onClick={() => {
-            console.log('Lógica aqui');
-          }}
-        >
+        <button type='button' aria-label='Fechar' onClick={handleCloseModal}>
           <MdClose size={21} />
         </button>
       </header>
