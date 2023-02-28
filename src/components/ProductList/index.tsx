@@ -4,10 +4,10 @@ import { IProduct } from '../../contexts/CartContext';
 import { useCartContext } from '../../hooks/useCartContext';
 
 const ProductList = () => {
-  const { products } = useCartContext();
+  const { searchProductsOnList } = useCartContext();
   return (
     <StyledProductList>
-      {products.map((product: IProduct) => (
+      {searchProductsOnList.map((product: IProduct) => (
         <ProductCard
           key={product.id}
           id={product.id}

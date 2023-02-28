@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { api } from '../services/api';
 
 interface IUserProvidertProps {
@@ -46,11 +44,11 @@ export const UserProvider = ({ children }: IUserProvidertProps) => {
   const registerUser = async (data: IRegisterUser) => {
     try {
       const response = await api.post('/users', data);
-      alert('Usuário cadastrado com sucesso');
+      toast.success('Usuário cadastrado com sucesso');
       navigate('/');
     } catch (error) {
       console.error(error);
-      alert('Erro ao cadastrar usuário');
+      toast.error('Erro ao cadastrar usuário');
     }
   };
 
@@ -59,14 +57,14 @@ export const UserProvider = ({ children }: IUserProvidertProps) => {
       const response = await api.post('/login', data);
       setUser(response.data.user);
       const token = response.data.accessToken;
-      const id = response.data.user;
+      const { id } = response.data.user;
       localStorage.setItem('@TOKEN-BURGER', token);
       localStorage.setItem('@ID-BURGER', id);
-      alert('Login efetuado com sucesso');
+      toast.success('Login efetuado com sucesso');
       navigate('/shop');
     } catch (error) {
       console.error(error);
-      alert('Erro ao fazer login');
+      toast.error('Erro ao fazer login');
     }
   };
 
@@ -82,7 +80,7 @@ export const UserProvider = ({ children }: IUserProvidertProps) => {
     const id = localStorage.getItem('@ID-BURGER');
     if (token) {
       try {
-        const response = await api.get(`/products/${id}`, {
+        const response = await api.get(`/users/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

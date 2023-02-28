@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
-import { TextFieldProps } from '@mui/material';
 import { StyledTextField } from '../../../styles/form';
 import { StyledParagraph } from '../../../styles/typography';
 
 type IInputProps = {
   label: string;
   error?: string;
-} & TextFieldProps;
+  type: string;
+};
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(
   ({ label, type, error, ...rest }, ref) => (

@@ -6,7 +6,7 @@ import { StyledForm } from '../../../styles/form';
 import Input from '../Input';
 import { useUserContext } from '../../../hooks/useUserContext';
 
-interface IFormLogin {
+export interface IFormLogin {
   email: string;
   password: string;
 }
@@ -40,11 +40,13 @@ const LoginForm = () => {
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Input
         label='Email'
+        type='text'
         error={errors.email?.message}
         {...register('email')}
       />
       <Input
         label='Senha'
+        type='password'
         error={errors.password?.message}
         {...register('password')}
       />

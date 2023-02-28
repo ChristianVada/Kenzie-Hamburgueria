@@ -6,6 +6,10 @@ import ProductList from '../../components/ProductList';
 
 import { StyledContainer } from '../../styles/grid';
 
+export interface IHandleCloseModal {
+  handleCloseModal: () => void;
+}
+
 const ShopPage = () => {
   const [showModal, setShowModal] = useState(false);
 
