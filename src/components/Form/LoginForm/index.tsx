@@ -1,25 +1,53 @@
-import { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
 import Input from '../Input';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useUserContext } from '../../../hooks/useUserContext';
 
-interface IFormInput {
-  name: string;
+interface IFormLogin {
+  email: string;
   password: string;
 }
 
-const LoginForm = () => {
-  const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState('');
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .email('E-mail deve ser um e-mail válido')
+      .required('E-mail é um campo obrigatório'),
+    password: yup.string().required('Senha é um campo obrigatório'),
+  })
+  .required();
 
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+const LoginForm = () => {
+  const { loginUser } = useUserContext();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormLogin>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<IFormLogin> = (data) => {
+    loginUser(data);
+  };
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Input label={'Nome'} {...register('name')} />
-      <Input label={'Senha'} {...register('password')} />
+      <Input
+        label='Email'
+        error={errors.email?.message}
+        {...register('email')}
+      />
+      <Input
+        label='Senha'
+        error={errors.password?.message}
+        {...register('password')}
+      />
       <StyledButton type='submit' $buttonSize='default' $buttonStyle='green'>
         Entrar
       </StyledButton>
