@@ -18,19 +18,11 @@ interface IRegisterUser {
   name: string;
 }
 
-interface IAutoLoginUser {
-  email: string;
-  password: string;
-  name: string;
-  id: number;
-}
-
 interface IUserContext {
   user: IRegisterUser | null;
   setUser: React.Dispatch<React.SetStateAction<IRegisterUser | null>>;
   registerUser: (data: IRegisterUser) => Promise<void>;
   loginUser: (data: IloginUser) => Promise<void>;
-  autoLoginUser: (userId: IAutoLoginUser) => Promise<void>;
   logoutUser: () => void;
 }
 
@@ -86,6 +78,7 @@ export const UserProvider = ({ children }: IUserProvidertProps) => {
           },
         });
         setUser(response.data);
+        navigate('/shop');
       } catch (error) {
         console.error(error);
       }
@@ -103,7 +96,6 @@ export const UserProvider = ({ children }: IUserProvidertProps) => {
         setUser,
         registerUser,
         loginUser,
-        autoLoginUser,
         logoutUser,
       }}
     >

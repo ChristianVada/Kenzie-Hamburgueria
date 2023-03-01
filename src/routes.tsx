@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { CartProvider } from './contexts/CartContext';
 import { UserProvider } from './contexts/UserContext';
 import LoginPage from './pages/LoginPage';
+import { ProtectedRoutesPage } from './pages/ProtectedRoutesPage';
 import RegisterPage from './pages/RegisterPage';
 import ShopPage from './pages/ShopPage';
 
@@ -28,11 +29,13 @@ const Router = () => (
       element={
         <UserProvider>
           <CartProvider>
-            <ShopPage />
+            <ProtectedRoutesPage />
           </CartProvider>
         </UserProvider>
       }
-    />
+    >
+      <Route index element={<ShopPage />} />
+    </Route>
   </Routes>
 );
 
