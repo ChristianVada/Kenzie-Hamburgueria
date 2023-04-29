@@ -15,7 +15,7 @@ interface IFormRegister {
 
 const schema = yup
   .object({
-    name: yup.string(),
+    name: yup.string().required('Nome é um campo obrigatório'),
     email: yup
       .string()
       .email('E-mail deve ser um e-mail válido')
